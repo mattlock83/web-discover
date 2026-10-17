@@ -8,7 +8,7 @@ import type { Page, Request, Response } from "playwright";
 import { VisitEvidence } from "../src/discovery-evidence.js";
 
 test("Evidence limits count only JSON exchanges, including GET responses and failed JSON requests", async () => {
-  const directory = await mkdtemp(join(tmpdir(), "testwalker-json-evidence-"));
+  const directory = await mkdtemp(join(tmpdir(), "web-discover-json-evidence-"));
   const page = new EventEmitter();
   const record = { id: "visit-0001", artifacts: {}, capture_errors: [] };
   const evidence = new VisitEvidence(

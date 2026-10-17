@@ -174,9 +174,9 @@ test("Form proposals preserve hints without inventing business constraints or pa
 });
 test(
   "Crawlee discovers one layer, captures only screenshots/JSON traffic, and respects sitemap scope",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
-    const temp = await mkdtemp(join(tmpdir(), "testwalker-discovery-test-"));
+    const temp = await mkdtemp(join(tmpdir(), "web-discover-test-"));
     const site = join(temp, "site");
     const { mkdir } = await import("node:fs/promises");
     await mkdir(site);
@@ -289,9 +289,9 @@ test(
 
 test(
   "Discovery replays JavaScript buttons, shadow options and form routes before following links",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
-    const temp = await mkdtemp(join(tmpdir(), "testwalker-discovery-routes-"));
+    const temp = await mkdtemp(join(tmpdir(), "web-discover-routes-"));
     await writeFile(
       join(temp, "index.html"),
       `<h1>Entry</h1><button onclick="start()">Begin</button><div id="content"></div>
@@ -390,10 +390,10 @@ test(
 
 test(
   "Discovery explores every submit control and replays the selected control through subsequent forms",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
     const temp = await mkdtemp(
-      join(tmpdir(), "testwalker-discovery-submitters-"),
+      join(tmpdir(), "web-discover-submitters-"),
     );
     await writeFile(
       join(temp, "index.html"),
@@ -478,9 +478,9 @@ test(
 
 test(
   "Generic native forms handle fieldsets, boolean checkboxes and existing radio selections",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
-    const temp = await mkdtemp(join(tmpdir(), "testwalker-discovery-native-"));
+    const temp = await mkdtemp(join(tmpdir(), "web-discover-native-"));
     await writeFile(
       join(temp, "index.html"),
       `<h1>Preferences</h1>
@@ -549,10 +549,10 @@ test(
 
 test(
   "Discovery restores observed examples when an empty form loses its prefilled choices",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
     const temp = await mkdtemp(
-      join(tmpdir(), "testwalker-discovery-recovery-"),
+      join(tmpdir(), "web-discover-recovery-"),
     );
     await writeFile(
       join(temp, "index.html"),
@@ -603,9 +603,9 @@ test(
 
 test(
   "Discovery waits for async UI, avoids covered controls, and replays standalone selections",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
-    const temp = await mkdtemp(join(tmpdir(), "testwalker-discovery-ui-"));
+    const temp = await mkdtemp(join(tmpdir(), "web-discover-ui-"));
     await writeFile(
       join(temp, "index.html"),
       `<title>Generic shop</title>
@@ -747,10 +747,10 @@ test(
 
 test(
   "Repetitive states retain observations and explicitly defer their known frontier",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
     const temp = await mkdtemp(
-      join(tmpdir(), "testwalker-discovery-frontier-"),
+      join(tmpdir(), "web-discover-frontier-"),
     );
     await writeFile(
       join(temp, "index.html"),
@@ -801,10 +801,10 @@ test(
 
 test(
   "Unsettled actions keep diagnostics and evidence without inventing graph transitions",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
     const temp = await mkdtemp(
-      join(tmpdir(), "testwalker-discovery-unsettled-"),
+      join(tmpdir(), "web-discover-unsettled-"),
     );
     await writeFile(
       join(temp, "index.html"),

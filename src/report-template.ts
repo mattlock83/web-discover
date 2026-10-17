@@ -1,6 +1,6 @@
 /** Static assets deliberately use no remote libraries or resources. */
 export const BODY = String.raw`
-<header><div class="brand"><span class="mark">↗</span><div><strong>testwalker <span>discover</span></strong><small>Observed journeys · model draft</small></div></div><nav id="downloads"></nav></header>
+<header><div class="brand"><span class="mark">↗</span><div><strong>web <span>discover</span></strong><small>Observed journeys · model draft</small></div></div><nav id="downloads"></nav></header>
 <main>
   <div class="heading"><div><p class="eyebrow">EXPLORATION REPORT</p><h1>See what discovery found.</h1><p id="sources" class="muted"></p></div><span class="pill" id="outcome"></span></div>
   <div id="stats" class="stats"></div>

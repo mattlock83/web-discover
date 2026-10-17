@@ -261,7 +261,7 @@ export async function writeDiscoveryReport(
     .replace(/</g, "\\u003c")
     .replace(/\u2028/g, "\\u2028")
     .replace(/\u2029/g, "\\u2029");
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Testwalker discovery results</title><style>${STYLE}</style></head><body>${BODY}<script id="report-data" type="application/json">${encoded}</script><script>${SCRIPT}</script></body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Web Discover results</title><style>${STYLE}</style></head><body>${BODY}<script id="report-data" type="application/json">${encoded}</script><script>${SCRIPT}</script></body></html>`;
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, html, { flag: "wx" });
   return output;

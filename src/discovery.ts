@@ -753,7 +753,7 @@ export async function discoverUrls(
     }
     throw new Error("Discovery output exists; choose a new filename");
   }
-  const staging = await mkdtemp(join(tmpdir(), "testwalker-discovery-"));
+  const staging = await mkdtemp(join(tmpdir(), "web-discover-"));
   const artifactStage = join(staging, "artifacts");
   await mkdir(artifactStage);
   const inventory: Json = {

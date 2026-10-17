@@ -1,6 +1,6 @@
 # Discovery reference
 
-Start with [the package guide](../README.md) for setup and a local example. Commands below run from the repository root.
+Start with [the package guide](../README.md) for setup and installation. Commands below run from the repository root; a global installation can use `web-discover` directly in place of `npx --no-install web-discover`.
 
 ## Output location
 
@@ -13,7 +13,7 @@ The public discovery functions use the same layout. Inventory asset paths are re
 URL mode stays on the seed origin and explores links and native forms up to `--depth`:
 
 ```bash
-npx --no-install testwalker-discover discover-url \
+npx --no-install web-discover discover-url \
   --url http://localhost:3000/ --output models/site.model.json \
   --depth 2 --max-pages 50 --max-actions 200
 ```
@@ -53,9 +53,9 @@ State families group repetitive variants to bound expansion. Distinct observed s
 
 Only successfully observed transitions enter the model. The export uses identifier names without spaces, readable business descriptions/intents, and numeric Studio coordinates in `properties.x`/`properties.y`. An exact entry/fragment alias can be merged when the full UI snapshot is identical and unambiguous; raw observations remain in the inventory.
 
-Draft rules describe observed structure, not independently expected business behavior. Fixed scalar form examples preserve replay inputs. Proposed dictionaries appear as `suggested_data_sets` in the inventory, not Hegel campaigns. Add accepted/rejected states, constraints and independent rules during review.
+Draft rules describe observed structure, not independently expected business behavior. Fixed scalar form examples preserve replay inputs. Proposed dictionaries appear as `suggested_data_sets` in the inventory. Add accepted/rejected states, constraints and independent rules during review.
 
-Terminal states, disconnected routes and the sampled frontier can prevent full graph traversal. In particular, New York Street Sweeper needs strong connectivity. Use the inventory's warnings and deferred actions to refine the model before execution. See [business model authoring](../../core/docs/model-format.md).
+Terminal states, disconnected routes and the sampled frontier can prevent full graph traversal. Use the inventory's warnings and deferred actions to refine the model before execution. For Testwalker-specific rules and model extensions, see its [business model authoring guide](https://github.com/mattlock83/testwalker/blob/main/core/docs/model-format.md).
 
 ## Browser and evidence options
 
@@ -114,7 +114,7 @@ Keys match field names, or labels for unnamed fields. Checkbox values are boolea
 A module passed with `--hooks` may export `before_visit`, `after_visit`, `before_submit` and `after_submit`. Context supplies `page`, `url`, `form`, `values`, `snapshot` where applicable, shared `scratch`, `skip` and `handled`:
 
 ```ts
-import type { DiscoveryContext } from "@testwalker/discover";
+import type { DiscoveryContext } from "web-discover";
 
 export async function before_submit(ctx: DiscoveryContext) {
   ctx.values["Email address"] = "specific@example.com";
@@ -127,6 +127,6 @@ Visit hooks can perform browser/API setup. In a submission hook, set `skip` to a
 
 The inventory records visits, executed journeys, failures and pending actions with their routes and reasons. Pending work covers only the observed frontier; it cannot describe unknown pages. Discovery success does not establish business correctness.
 
-Use `testwalker-discover report` to rebuild a viewer without crawling. Use `discoverUrl`, `discoverUrls` or `discoverSitemap` from the public API to integrate discovery into a separate authoring tool.
+Use `web-discover report` to rebuild a viewer without crawling. Use `discoverUrl`, `discoverUrls` or `discoverSitemap` from the public API to integrate discovery into a separate authoring tool.
 
-Local example commands and comparison fixtures are documented under [Trailhead discovery](../../demos/trailhead/discovery/README.md) and [Sauce Demo discovery](../../demos/saucedemo/discovery/README.md).
+The upstream Testwalker repository contains [Trailhead discovery](https://github.com/mattlock83/testwalker/blob/main/demos/trailhead/discovery/README.md) and [Sauce Demo discovery](https://github.com/mattlock83/testwalker/blob/main/demos/saucedemo/discovery/README.md) fixtures and comparisons. Those examples document the original monorepo commands; use this package's `web-discover` CLI when running a standalone crawl.

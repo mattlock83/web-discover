@@ -11,11 +11,11 @@ import { httpUrl, loadBrowserSettings } from "./config.js";
 import { writeDiscoveryReport, type ReportRun } from "./report.js";
 import type { Json, Model } from "./types.js";
 
-const HELP = `Testwalker discovery — standalone Crawlee + Playwright; no Jev or Rust needed.
+const HELP = `Web Discover — standalone website exploration with Crawlee + Playwright.
 
-testwalker-discover discover-url --url URL --output SITE.model.json [--depth 1]
-testwalker-discover discover-sitemap --sitemap SITEMAP.xml --output SITE.model.json
-testwalker-discover report --inventory INVENTORY.json [--inventory ANOTHER.json] [--model MODEL.json] [--output index.html]
+web-discover discover-url --url URL --output SITE.model.json [--depth 1]
+web-discover discover-sitemap --sitemap SITEMAP.xml --output SITE.model.json
+web-discover report --inventory INVENTORY.json [--inventory ANOTHER.json] [--model MODEL.json] [--output index.html]
 
 Discovery writes the model at --output, normalized to .model.json.
 Inventory, index.html and visit assets go to artifact/<timestamped run>/ beside

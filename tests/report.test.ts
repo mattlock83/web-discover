@@ -10,7 +10,7 @@ import { writeDiscoveryReport } from "../src/report.js";
 import type { Json } from "../src/types.js";
 
 async function fixture() {
-  const temp = await mkdtemp(join(tmpdir(), "testwalker-discovery-report-"));
+  const temp = await mkdtemp(join(tmpdir(), "web-discover-report-"));
   const malicious = "</script><script>globalThis.injected=true</script>";
   const pages = {
     entry: {
@@ -129,6 +129,8 @@ test("Offline report combines visit IDs safely, bounds JSON previews, and uses r
       { output, modelPath: f.modelPath },
     );
     const html = await readFile(output, "utf8");
+    assert.match(html, /<title>Web Discover results<\/title>/);
+    assert.match(html, /<strong>web <span>discover<\/span><\/strong>/);
     assert.ok(
       !html.includes(f.malicious),
       "Captured text cannot terminate a script",
@@ -168,7 +170,7 @@ test("Offline report combines visit IDs safely, bounds JSON previews, and uses r
 
 test(
   "Viewer works from file without network: graph, search, tabs and JSON evidence",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
     const f = await fixture();
     const browser = await chromium.launch({

@@ -91,7 +91,7 @@ test("Definition-list values and validation feedback disambiguate observed state
 
 test(
   "Browser capture reads displayed definition values without treating editable examples as state facts",
-  { skip: !process.env.TESTWALKER_BROWSER_TESTS },
+  { skip: !process.env.WEB_DISCOVER_BROWSER_TESTS },
   async () => {
     const browser = await chromium.launch({
       channel: "chrome",

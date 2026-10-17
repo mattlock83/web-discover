@@ -9,25 +9,32 @@ import { loadBrowserSettings } from "../src/config.js";
 import { buildModel } from "../src/discovery.js";
 
 const bin = fileURLToPath(
-  new URL("../../node_modules/.bin/testwalker-discover", import.meta.url),
+  new URL("../bin/cli.js", import.meta.url),
 );
-test("Standalone installed CLI needs no framework or decision key and rejects unknown options", () => {
-  const help = spawnSync(process.execPath, [bin, "--help"], {
-    encoding: "utf8",
-  });
-  assert.equal(help.status, 0);
-  assert.match(help.stdout, /no Jev or Rust needed/);
-  assert.match(help.stdout, /index.html/);
-  const bad = spawnSync(
-    process.execPath,
-    [bin, "discover-url", "--max-call", "10"],
-    { encoding: "utf8" },
-  );
-  assert.equal(bad.status, 2);
-  assert.match(bad.stderr, /Unknown option/);
+test("Standalone built CLI works outside the checkout and rejects unknown options", async () => {
+  const temp = await mkdtemp(join(tmpdir(), "web-discover-cli-"));
+  try {
+    const help = spawnSync(process.execPath, [bin, "--help"], {
+      cwd: temp,
+      encoding: "utf8",
+    });
+    assert.equal(help.status, 0, help.stderr);
+    assert.match(help.stdout, /Web Discover/);
+    assert.match(help.stdout, /web-discover discover-url/);
+    assert.match(help.stdout, /index.html/);
+    const bad = spawnSync(
+      process.execPath,
+      [bin, "discover-url", "--max-call", "10"],
+      { cwd: temp, encoding: "utf8" },
+    );
+    assert.equal(bad.status, 2);
+    assert.match(bad.stderr, /Unknown option/);
+  } finally {
+    await rm(temp, { recursive: true, force: true });
+  }
 });
 test("Discovery browser configuration has its own launch/context schema", async () => {
-  const temp = await mkdtemp(join(tmpdir(), "testwalker-discovery-config-"));
+  const temp = await mkdtemp(join(tmpdir(), "web-discover-config-"));
   try {
     const file = join(temp, "browser.json");
     await writeFile(
@@ -53,7 +60,7 @@ test("Discovery browser configuration has its own launch/context schema", async 
 });
 
 test("Report CLI finds run-local assets and defaults beside the timestamped inventory", async () => {
-  const temp = await mkdtemp(join(tmpdir(), "testwalker-discovery-run-"));
+  const temp = await mkdtemp(join(tmpdir(), "web-discover-run-"));
   const run = join(temp, "artifact", "2026-10-13T02-19-25.969Z-49708-0");
   const inventoryPath = join(run, "site.discovery.json"),
     modelPath = join(temp, "site.model.json");
